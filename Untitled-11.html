@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký thành viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .registration-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px; 
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        select {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .gender-group label {
+            display: inline;
+            font-weight: normal;
+            margin-right: 10px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button[type="reset"] {
+            background-color: #dc3545;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        legend {
+            font-weight: bold;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h2>ĐĂNG KÝ THÀNH VIÊN</h2>
+        <form action="#" method="post">
+            <fieldset>
+                <legend>Thông tin cá nhân</legend>
+                <div class="form-group">
+                    <label for="fullname">Họ và tên:</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="form-group">
+                    <label>Ngày sinh:</label>
+                    <select name="day">
+                        <?php for ($i = 1; $i <= 31; $i++) { echo '<option value="' . sprintf('%02d', $i) . '">' . sprintf('%02d', $i) . '</option>'; } ?>
+                    </select>
+                    <select name="month">
+                        <?php for ($i = 1; $i <= 12; $i++) { echo '<option value="' . sprintf('%02d', $i) . '">' . sprintf('%02d', $i) . '</option>'; } ?>
+                    </select>
+                    <input type="text" name="year" placeholder="Năm" size="4">
+                </div>
+                <div class="form-group gender-group">
+                    <label>Giới tính:</label>
+                    <label><input type="radio" name="gender" value="male" checked> Nam</label>
+                    <label><input type="radio" name="gender" value="female"> Nữ</label>
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" id="address" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Điện thoại:</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10,11}" placeholder="Nhập số điện thoại (10-11 số)" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Thông tin đăng nhập</legend>
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Nhập lại Mật khẩu:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+            </fieldset>
+
+            <div class="controls">
+                <button type="submit">Đăng ký</button>
+                <button type="reset">Hủy</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+        const submitButton = document.querySelector('button[type="submit"]');
+
+        confirmPasswordInput.addEventListener('input', function() {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.setCustomValidity('Mật khẩu nhập lại không khớp.');
+            } else {
+                confirmPasswordInput.setCustomValidity(''); 
+            }
+        });
+    </script>
+</body>
+</html>
